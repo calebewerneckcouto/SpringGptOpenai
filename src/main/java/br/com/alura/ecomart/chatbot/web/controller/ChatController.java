@@ -12,7 +12,7 @@ public class ChatController {
 
     private static final String PAGINA_CHAT = "chat";
 
-    private ChatbotService service;
+    private final ChatbotService service;
 
     public ChatController(ChatbotService service) {
         this.service = service;
@@ -20,10 +20,9 @@ public class ChatController {
 
     @GetMapping
     public String carregarPaginaChatbot(Model model) {
+        // Carrega o histórico de mensagens
         var mensagens = service.carregarHistorico();
-
         model.addAttribute("historico", mensagens);
-
         return PAGINA_CHAT;
     }
 
@@ -35,8 +34,9 @@ public class ChatController {
 
     @GetMapping("limpar")
     public String limparConversa() {
-        
+        // Limpa o histórico de mensagens
+        service.limparHistorico();
+        // Redireciona para a página de chat com o histórico limpo
         return "redirect:/chat";
     }
-
 }

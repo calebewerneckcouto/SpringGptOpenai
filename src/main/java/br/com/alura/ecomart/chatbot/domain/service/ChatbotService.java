@@ -25,5 +25,8 @@ public class ChatbotService {
         return client.carregarHistoricoDeMensagens();
     }
 
-    
+    // Método para limpar o histórico de mensagens
+    public void limparHistorico() {
+        client.apagarHistorico();
+    }
 }
